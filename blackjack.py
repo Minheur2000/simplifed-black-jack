@@ -2,6 +2,9 @@ colors = ["pique", "trefle", "carreau", "coeur"]
 nums = ["AS", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 tetes = ["J", "Q", "K"]
 
+cartesJoueur = []
+cartesOrdi = []
+
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
@@ -10,10 +13,19 @@ class Card:
 mainJoueur = []
 mainOrdi = []
 
+def carte_exists(card: Card):
+    for c in mainJoueur:
+        if c.suit == card.suit and c.rank == card.rank:
+            return True
+    for c in mainOrdi:
+        if c.suit == card.suit and c.rank == card.rank:
+            return True
+    return False
+
 def point_pour_card(card):
     if card.rank == "AS":
         return 11
-    elif tetes.__contains__(card.rank):
+    elif card.rank in tetes:
         return 10
     else:
         return card.rank
