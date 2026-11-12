@@ -45,6 +45,7 @@ def somme_points(joueur):
             points += 1
         else:
             points += 11
+    return points
 
 def draw_card():
     card = Card(suit=random.choice(colors), rank=random.choice(colors))
@@ -52,10 +53,29 @@ def draw_card():
         card = Card(suit=random.choice(colors), rank=random.choice(colors))
     return card
 
+def tour():
+    print(f"Votre main vaut {somme_points(mainJoueur)}")
+
 def main():
     print("Bienvenu dans BlackJack!")
     print("Utilisez [Entrée] pour lancer le jeu")
     print()
     input()
+
+    # draw 2 cartes pour joueur
+    print("Vous piochez deux cartes...")
+    joueur1 = draw_card()
+    joueur2 = draw_card()
+    print(f"Vous avez pioché {joueur1.rank} de {joueur1.suit}")
+    print(f"Vous avez pioché {joueur2.rank} de {joueur2.suit}")
+    mainJoueur.append(joueur1)
+    mainJoueur.append(joueur2)
+    # draw 2 cartes ordi
+    print("L'ordinateur pioche deux cartes...")
+    mainOrdi.append(draw_card())
+    mainOrdi.append(draw_card())
+
+    # enter main game loop
+    tour()
 
 main()
