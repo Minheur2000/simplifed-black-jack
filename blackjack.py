@@ -30,7 +30,7 @@ def point_pour_card(card):
     elif card.rank in tetes:
         return 10
     else:
-        return card.rank
+        return int(card.rank)
 
 def somme_points(joueur):
     as_amount = 0
