@@ -1,3 +1,5 @@
+import random
+
 colors = ["pique", "trefle", "carreau", "coeur"]
 nums = ["AS", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 tetes = ["J", "Q", "K"]
@@ -44,6 +46,11 @@ def somme_points(joueur):
         else:
             points += 11
 
+def draw_card():
+    card = Card(suit=random.choice(colors), rank=random.choice(colors))
+    while carte_exists(card):
+        card = Card(suit=random.choice(colors), rank=random.choice(colors))
+    return card
 
 def main():
     print("Bienvenu dans BlackJack!")
