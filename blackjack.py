@@ -48,9 +48,9 @@ def somme_points(joueur):
     return points
 
 def draw_card():
-    card = Card(suit=random.choice(colors), rank=random.choice(colors))
+    card = Card(suit=random.choice(colors), rank=random.choice(nums))
     while carte_exists(card):
-        card = Card(suit=random.choice(colors), rank=random.choice(colors))
+        card = Card(suit=random.choice(colors), rank=random.choice(nums))
     return card
 
 def tour():
