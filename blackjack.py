@@ -5,6 +5,8 @@ nums = ["AS", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 tetes = ["J", "Q", "K"]
 totalCards = 52
 
+commands = ["MAIN", "DRAW", "STOP"]
+
 cartesJoueur = []
 cartesOrdi = []
 
@@ -65,11 +67,44 @@ def draw_card():
             print("GAME IS CRASHED")
             print("GAME IS CRASHED")
             print("There is no more cards available to draw")
-            return None
+            raise RuntimeError("NO MORE CARDS AVAILABLE")
     return card
+
+def play_main():
+    print("Voici votre main:")
+    for card in mainJoueur:
+        print(f" - {card.rank} de {card.suit}")
+
+def play_draw():
+    pass
+
+def play_stop():
+    pass
 
 def tour():
     print(f"Votre main vaut {somme_points(mainJoueur)}")
+    # print actions
+    print("Actions:")
+    print(" - MAIN : obtenez vos cartes exactes en main")
+    print(" - DRAW : vous piochez une carte.")
+    print("   L'ordi choisira de suivre ou arrêter")
+    print(" - STOP : vous arrêtez de piocher")
+    print("   L'ordi choisira de continuer ou arrêter")
+    # get action
+    action = input()
+    if not action.upper() in commands: # command not recognized
+        print("Nous n'avons pas compris...")
+        print()
+        tour() # rerun tour
+    # EXEC ACTION
+    match action.upper():
+        case "MAIN":
+            play_main()
+            tour()
+        case "DRAW":
+            play_draw()
+        case "STOP":
+            play_stop()
 
 def main():
     print("Bienvenu dans BlackJack!")
