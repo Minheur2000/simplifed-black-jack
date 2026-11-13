@@ -25,6 +25,11 @@ def card_exists(card: Card):
             return True
     return False
 
+def cards_left():
+    found = len(mainJoueur)
+    found += len(mainOrdi)
+    return totalCards - found
+
 def card_value(card):
     if card.rank == "AS":
         return 11
