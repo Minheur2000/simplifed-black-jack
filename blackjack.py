@@ -21,9 +21,6 @@ class WinStatus(Enum):
 
 commands = ["MAIN", "DRAW", "STOP", "ACTION"]
 
-cartesJoueur = []
-cartesOrdi = []
-
 class Card:
     def __init__(self, suit:str, rank:str):
         self.suit = suit
@@ -31,6 +28,7 @@ class Card:
 
 mainJoueur = []
 mainOrdi = []
+ordiDrawing:bool = True
 
 def check_win_status(stopped = False) -> WinStatus:
     # get scores
@@ -108,6 +106,28 @@ def draw_card() -> Card:
             raise RuntimeError("NO MORE CARDS AVAILABLE")
     return card
 
+def ordi_draw():
+    if cards_left() == 0: # check if no cards
+        no_cards_left()
+        return
+    # check if the ordi should not draw
+    global ordiDrawing
+    if not ordiDrawing:
+        return
+    if somme_points(mainOrdi) >= 17:
+        print("L'ordi choisi d'arrêter de piocher.")
+        ordiDrawing = False
+        return
+    # ordi draws
+    mainOrdi.append(draw_card())
+    print("L'ordi pioche une carte...")
+    # check winning
+    result = check_win_status()
+    if result == WinStatus.ORDI_21:
+        loss_21()
+    elif result == WinStatus.ORDI_OVER_21:
+        win_plus_21()
+
 def play_actions():
     # print actions
     print("Actions:")
@@ -123,7 +143,21 @@ def play_main():
         print(f" - {card.rank} de {card.suit}")
 
 def play_draw():
-    pass
+    # joueur pioche
+    print("Vous piochez une carte...")
+    card = draw_card()
+    mainJoueur.append(card)
+    print(f"Vous avez {card.rank} de {card.suit}")
+    # check win
+    result = check_win_status()
+    if result == WinStatus.PLAYER_21:
+        win_21()
+        return
+    elif result == WinStatus.PLAYER_OVER_21:
+        loss_plus_21()
+        return
+    # ordi pioche si il veux
+    ordi_draw()
 
 def play_stop():
     pass
@@ -183,6 +217,16 @@ def main():
 def win_early_21():
     pass
 def loss_early_21():
+    pass
+def loss_21():
+    pass
+def win_21():
+    pass
+def win_plus_21():
+    pass
+def loss_plus_21():
+    pass
+def no_cards_left():
     pass
 
 main()
