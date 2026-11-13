@@ -108,12 +108,12 @@ def draw_card() -> Card:
     return card
 
 def ordi_draw():
+    global ordiDrawing
     if cards_left() == 0: # check if no cards
         ordiDrawing = False # to stop running this if player stopped too
         no_cards_left()
         return
     # check if the ordi should not draw
-    global ordiDrawing
     if not ordiDrawing:
         return
     if somme_points(mainOrdi) >= 17:
