@@ -1,9 +1,23 @@
 import random
+from enum import Enum
 
 colors = ["pique", "trefle", "carreau", "coeur"]
 nums = ["AS", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 tetes = ["J", "Q", "K"]
 totalCards = 52
+
+class WinStatus(Enum):
+    # INSTA WIN
+    PLAYER_21 = "p21"
+    ORDI_21 = "o21"
+    PLAYER_OVER_21 = "p+21"
+    ORDI_OVER_21 = "o+21"
+    # WIN if both stopped
+    PLAYER_HIGHER = "p+"
+    ORDI_HIGHER = "o+"
+    EQUALS = "e"
+    # no winner yet
+    CONTINU = "c"
 
 commands = ["MAIN", "DRAW", "STOP"]
 
@@ -17,6 +31,30 @@ class Card:
 
 mainJoueur = []
 mainOrdi = []
+
+def check_win_status(stopped = False) -> WinStatus:
+    # get scores
+    value_player = somme_points(mainJoueur)
+    value_ordi = somme_points(mainOrdi)
+
+    if value_player == 21: # player is 21 : win
+        return WinStatus.PLAYER_21
+    elif value_ordi == 21: # ordi is 21 : win
+        return WinStatus.ORDI_21
+    elif value_player > 21: # player OVER 21 : loss
+        return WinStatus.PLAYER_OVER_21
+    elif value_ordi > 21: # ordi OVER 21 : loss
+        return WinStatus.ORDI_OVER_21
+    elif stopped: # If both have stopped drawing
+        if value_ordi > value_player: # and ordi is better
+            return WinStatus.ORDI_HIGHER
+        elif value_player > value_ordi: # of player is better
+            return WinStatus.PLAYER_HIGHER
+        else:
+            return WinStatus.EQUALS # player and ordi are equals
+    else:
+        return WinStatus.CONTINU # they have not stopped : we continue playing
+
 
 def card_exists(card: Card):
     for c in mainJoueur:
@@ -124,6 +162,9 @@ def main():
     print("L'ordinateur pioche deux cartes...")
     mainOrdi.append(draw_card())
     mainOrdi.append(draw_card())
+
+    # check insta-win
+    check_win_status()
 
     # enter main game loop
     tour()
