@@ -32,10 +32,10 @@ def card_value(card):
     else:
         return int(card.rank)
 
-def somme_points(joueur):
+def somme_points(hand):
     as_amount = 0
     points = 0
-    for card in joueur:
+    for card in hand:
         if card.rank == "AS":
             as_amount += 1
         else:
