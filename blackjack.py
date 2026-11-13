@@ -207,6 +207,8 @@ def main():
     print("Utilisez [Entrée] pour lancer le jeu")
     print()
     input()
+    play_actions()
+    print()
 
     # draw 2 cartes pour joueur
     print("Vous piochez deux cartes...")
@@ -229,7 +231,6 @@ def main():
         return
 
     # enter main game loop
-    play_actions()
     tour()
 
 def win_early_21():
