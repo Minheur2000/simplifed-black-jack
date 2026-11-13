@@ -257,7 +257,27 @@ def no_cards_left():
     print("Il ne reste plus de cartes dans la pioche.")
     conventional_stop()
 def conventional_stop():
-    pass
+    result = check_win_status(stopped=True)
+    match result:
+        case WinStatus.PLAYER_21:
+            win_21()
+        case WinStatus.ORDI_21:
+            loss_21()
+        case WinStatus.PLAYER_OVER_21:
+            loss_plus_21()
+        case WinStatus.ORDI_OVER_21:
+            win_plus_21()
+        case WinStatus.PLAYER_HIGHER:
+            print("Vous avez plus de points de l'ordi !")
+            print("Vous avez gagné !")
+            recap()
+        case WinStatus.ORDI_HIGHER:
+            print("Vous avez moins de points de l'ordi !")
+            print("Vous avez perdu...")
+            recap()
+        case WinStatus.EQUALS:
+            print("Égalité !")
+            recap()
 
 def recap():
     print()
