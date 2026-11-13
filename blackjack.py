@@ -93,7 +93,7 @@ def somme_points(hand) -> int:
             points += 11
     return points
 
-def draw_card():
+def draw_card() -> Card:
     card = Card(suit=random.choice(colors), rank=random.choice(nums))
     drawn = [card]
     while card_exists(card):
