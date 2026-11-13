@@ -131,9 +131,13 @@ def ordi_draw():
     # check winning
     result = check_win_status()
     if result == WinStatus.ORDI_21:
+        ordiDrawing = False
         loss_21()
+        return
     elif result == WinStatus.ORDI_OVER_21:
+        ordiDrawing = False
         win_plus_21()
+        return
     elif playerDrawing:
         tour()
 
