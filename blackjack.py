@@ -70,7 +70,7 @@ def cards_left() -> int:
     found += len(mainOrdi)
     return totalCards - found
 
-def card_value(card):
+def card_value(card) -> int:
     if card.rank == "AS":
         return 11
     elif card.rank in tetes:
