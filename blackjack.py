@@ -56,7 +56,7 @@ def check_win_status(stopped = False) -> WinStatus:
         return WinStatus.CONTINU # they have not stopped : we continue playing
 
 
-def card_exists(card: Card):
+def card_exists(card: Card) -> bool:
     for c in mainJoueur:
         if c.suit == card.suit and c.rank == card.rank:
             return True
@@ -65,7 +65,7 @@ def card_exists(card: Card):
             return True
     return False
 
-def cards_left():
+def cards_left() -> int:
     found = len(mainJoueur)
     found += len(mainOrdi)
     return totalCards - found
