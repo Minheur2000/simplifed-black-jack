@@ -254,7 +254,8 @@ def loss_plus_21():
     print("Vous avez dépassé 21 et avez donc perdu...")
     recap()
 def no_cards_left():
-    pass
+    print("Il ne reste plus de cartes dans la pioche.")
+    conventional_stop()
 def conventional_stop():
     pass
 
