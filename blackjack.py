@@ -162,6 +162,7 @@ def play_draw():
         return
     # ordi pioche si il veux
     ordi_draw()
+    tour()
 
 def play_stop():
     print("Vous arrêtez de piocher.")
