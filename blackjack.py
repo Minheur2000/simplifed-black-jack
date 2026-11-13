@@ -31,6 +31,8 @@ mainOrdi = []
 ordiDrawing:bool = True
 playerDrawing:bool = True
 
+continuePlaying = True
+
 def check_win_status(stopped = False) -> WinStatus:
     # get scores
     value_player = somme_points(mainJoueur)
@@ -213,8 +215,13 @@ def tour():
 def main():
     print("Bienvenu dans BlackJack!")
     print("Utilisez [Entrée] pour lancer le jeu")
+    print("Entrez 'stop' puis [Entrée] pour quitter")
     print()
-    input()
+    exists = input()
+    if exists.lower() == "stop":
+        global continuePlaying
+        continuePlaying = False
+        return
     play_actions()
     print()
 
@@ -298,4 +305,16 @@ def recap():
     for card in mainOrdi:
         print(f" - {card.rank} de {card.suit}")
 
-main()
+def reset_values():
+    global mainJoueur
+    global mainOrdi
+    global ordiDrawing
+    global playerDrawing
+    mainJoueur = []
+    mainOrdi = []
+    ordiDrawing = True
+    playerDrawing = True
+
+while continuePlaying:
+    reset_values()
+    main()
