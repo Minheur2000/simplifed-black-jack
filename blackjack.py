@@ -19,7 +19,7 @@ class WinStatus(Enum):
     # no winner yet
     CONTINU = "c"
 
-commands = ["MAIN", "DRAW", "STOP"]
+commands = ["MAIN", "DRAW", "STOP", "ACTION"]
 
 cartesJoueur = []
 cartesOrdi = []
@@ -108,6 +108,15 @@ def draw_card() -> Card:
             raise RuntimeError("NO MORE CARDS AVAILABLE")
     return card
 
+def play_actions():
+    # print actions
+    print("Actions:")
+    print(" - MAIN : obtenez vos cartes exactes en main")
+    print(" - DRAW : vous piochez une carte.")
+    print("   L'ordi choisira de suivre ou arrêter")
+    print(" - STOP : vous arrêtez de piocher")
+    print("   L'ordi choisira de continuer ou arrêter")
+
 def play_main():
     print("Voici votre main:")
     for card in mainJoueur:
@@ -121,13 +130,7 @@ def play_stop():
 
 def tour():
     print(f"Votre main vaut {somme_points(mainJoueur)}")
-    # print actions
-    print("Actions:")
-    print(" - MAIN : obtenez vos cartes exactes en main")
-    print(" - DRAW : vous piochez une carte.")
-    print("   L'ordi choisira de suivre ou arrêter")
-    print(" - STOP : vous arrêtez de piocher")
-    print("   L'ordi choisira de continuer ou arrêter")
+    print("Faites 'ACTION' pour vos actions")
     # get action
     action = input()
     if not action.upper() in commands: # command not recognized
@@ -136,7 +139,10 @@ def tour():
         tour() # rerun tour
     # EXEC ACTION
     match action.upper():
-        case "MAIN":
+        case "ACTION": # rewrite actions available
+            play_actions()
+            tour()
+        case "MAIN": # simple handshake : we send some messages then we to this back
             play_main()
             tour()
         case "DRAW":
@@ -171,6 +177,7 @@ def main():
         return
 
     # enter main game loop
+    play_actions()
     tour()
 
 def win_early_21():
