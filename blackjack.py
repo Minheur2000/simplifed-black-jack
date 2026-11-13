@@ -3,6 +3,7 @@ import random
 colors = ["pique", "trefle", "carreau", "coeur"]
 nums = ["AS", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 tetes = ["J", "Q", "K"]
+totalCards = 52
 
 cartesJoueur = []
 cartesOrdi = []
@@ -49,8 +50,17 @@ def somme_points(hand):
 
 def draw_card():
     card = Card(suit=random.choice(colors), rank=random.choice(nums))
+    drawn = [card]
     while card_exists(card):
         card = Card(suit=random.choice(colors), rank=random.choice(nums))
+        if not card in drawn:
+            drawn.append(card)
+        if len(drawn) >= totalCards:
+            print("GAME IS CRASHED")
+            print("GAME IS CRASHED")
+            print("GAME IS CRASHED")
+            print("There is no more cards available to draw")
+            return None
     return card
 
 def tour():
