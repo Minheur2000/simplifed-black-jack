@@ -219,18 +219,31 @@ def main():
     tour()
 
 def win_early_21():
-    pass
+    print("Vous avez obtenu 21 sur votre premier tour !")
+    print("Vous avez gagné cette partie!")
+    recap()
 def loss_early_21():
-    pass
+    print("L'ordinateur à eu 21 sur sont premier tour !")
+    print("Vous avez perdu...")
+    recap()
 def loss_21():
-    pass
+    print("L'ordinateur à atteint 21 !")
+    print("Vous avez perdu...")
+    recap()
 def win_21():
-    pass
+    print("Vous avez atteint 21 !")
+    print("Vous avez gagné cette partie!")
+    recap()
 def win_plus_21():
-    pass
+    print("L'ordinateur à dépassé 21, vous avez donc gagné !")
+    recap()
 def loss_plus_21():
-    pass
+    print("Vous avez dépassé 21 et avez donc perdu...")
+    recap()
 def no_cards_left():
+    pass
+
+def recap():
     pass
 
 main()
