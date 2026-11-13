@@ -78,7 +78,7 @@ def card_value(card) -> int:
     else:
         return int(card.rank)
 
-def somme_points(hand):
+def somme_points(hand) -> int:
     as_amount = 0
     points = 0
     for card in hand:
