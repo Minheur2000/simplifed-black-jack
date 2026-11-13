@@ -158,15 +158,24 @@ def main():
     print(f"Vous avez pioché {joueur2.rank} de {joueur2.suit}")
     mainJoueur.append(joueur1)
     mainJoueur.append(joueur2)
+    if check_win_status() == WinStatus.PLAYER_21: # first check : player gets insta 21
+        win_early_21()
+        return
+
     # draw 2 cartes ordi
     print("L'ordinateur pioche deux cartes...")
     mainOrdi.append(draw_card())
     mainOrdi.append(draw_card())
-
-    # check insta-win
-    check_win_status()
+    if check_win_status() == WinStatus.ORDI_21: # second check : ordi gets insta 21
+        loss_early_21()
+        return
 
     # enter main game loop
     tour()
+
+def win_early_21():
+    pass
+def loss_early_21():
+    pass
 
 main()
