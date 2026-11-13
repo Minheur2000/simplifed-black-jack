@@ -24,7 +24,7 @@ def card_exists(card: Card):
             return True
     return False
 
-def point_pour_card(card):
+def card_value(card):
     if card.rank == "AS":
         return 11
     elif card.rank in tetes:
@@ -39,7 +39,7 @@ def somme_points(joueur):
         if card.rank == "AS":
             as_amount += 1
         else:
-            points += point_pour_card(card)
+            points += card_value(card)
     for i in range(as_amount):
         if (points + 11) > 21:
             points += 1
