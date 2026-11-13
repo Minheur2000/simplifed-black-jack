@@ -163,6 +163,10 @@ def play_stop():
     pass
 
 def tour():
+    # check in no cards
+    if cards_left() == 0:
+        no_cards_left()
+        return
     print(f"Votre main vaut {somme_points(mainJoueur)}")
     print("Faites 'ACTION' pour vos actions")
     # get action
