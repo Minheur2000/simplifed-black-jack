@@ -29,6 +29,7 @@ class Card:
 mainJoueur = []
 mainOrdi = []
 ordiDrawing:bool = True
+playerDrawing:bool = True
 
 def check_win_status(stopped = False) -> WinStatus:
     # get scores
@@ -108,6 +109,7 @@ def draw_card() -> Card:
 
 def ordi_draw():
     if cards_left() == 0: # check if no cards
+        ordiDrawing = False # to stop running this if player stopped too
         no_cards_left()
         return
     # check if the ordi should not draw
@@ -117,6 +119,8 @@ def ordi_draw():
     if somme_points(mainOrdi) >= 17:
         print("L'ordi choisi d'arrêter de piocher.")
         ordiDrawing = False
+        if not playerDrawing: # if player stopped drawing - run conventional
+            conventional_stop()
         return
     # ordi draws
     mainOrdi.append(draw_card())
@@ -160,7 +164,16 @@ def play_draw():
     ordi_draw()
 
 def play_stop():
-    pass
+    print("Vous arrêtez de piocher.")
+    global playerDrawing
+    playerDrawing = False
+    if not ordiDrawing: # ordi ne piochait pas - fin de partie
+        print("L'ordi ne piochait pas non plus.")
+        conventional_stop()
+        return
+    # ordi draws till it not
+    while ordiDrawing:
+        ordi_draw()
 
 def tour():
     # check in no cards
@@ -241,6 +254,8 @@ def loss_plus_21():
     print("Vous avez dépassé 21 et avez donc perdu...")
     recap()
 def no_cards_left():
+    pass
+def conventional_stop():
     pass
 
 def recap():
