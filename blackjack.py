@@ -15,7 +15,7 @@ class Card:
 mainJoueur = []
 mainOrdi = []
 
-def carte_exists(card: Card):
+def card_exists(card: Card):
     for c in mainJoueur:
         if c.suit == card.suit and c.rank == card.rank:
             return True
@@ -49,7 +49,7 @@ def somme_points(joueur):
 
 def draw_card():
     card = Card(suit=random.choice(colors), rank=random.choice(nums))
-    while carte_exists(card):
+    while card_exists(card):
         card = Card(suit=random.choice(colors), rank=random.choice(nums))
     return card
 
