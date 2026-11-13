@@ -244,6 +244,12 @@ def no_cards_left():
     pass
 
 def recap():
-    pass
+    print()
+    print(f"Votre main, avec {somme_points(mainJoueur)} points :")
+    for card in mainJoueur:
+        print(f" - {card.rank} de {card.suit}")
+    print(f"Main de l'ordi, avec {somme_points(mainOrdi)} points :")
+    for card in mainOrdi:
+        print(f" - {card.rank} de {card.suit}")
 
 main()
