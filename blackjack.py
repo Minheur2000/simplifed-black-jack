@@ -115,12 +115,15 @@ def ordi_draw():
         return
     # check if the ordi should not draw
     if not ordiDrawing:
+        tour()
         return
     if somme_points(mainOrdi) >= 17:
         print("L'ordi choisi d'arrêter de piocher.")
         ordiDrawing = False
         if not playerDrawing: # if player stopped drawing - run conventional
             conventional_stop()
+        elif playerDrawing:
+            tour()
         return
     # ordi draws
     mainOrdi.append(draw_card())
@@ -131,6 +134,8 @@ def ordi_draw():
         loss_21()
     elif result == WinStatus.ORDI_OVER_21:
         win_plus_21()
+    elif playerDrawing:
+        tour()
 
 def play_actions():
     # print actions
@@ -162,7 +167,6 @@ def play_draw():
         return
     # ordi pioche si il veux
     ordi_draw()
-    tour()
 
 def play_stop():
     print("Vous arrêtez de piocher.")
